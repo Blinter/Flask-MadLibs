@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}
+MADLIBS!
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block header %}
+MADLIBS
+<hr />
+{% endblock %}
+
+{% block content %}
+{% if results %}
+<h3>Here's Your Story</h3>
+<div class="story">
+{{results}}
+</div>
+<hr />
+<form id="story_finish_go_back" method="get">
+    <input type="submit" value="GO BACK"/>
+</form>
+{% endif %}
+
+{% if idx %}
+{% if ask|length != 0 %}
+<form id="story_ask" method="get">
+    <input type="hidden" name="id_select" value="{{idx}}">
+    <h2>INPUT YOUR WORDS BELOW</h2>
+    {% for i in range(0, ask|length) %}
+    <div class="choices">
+    <label for="{{ask[i]}}">{{ask[i]}}
+    </label>
+    <br/>
+    <input id="{{ask[i]}}" name="i{{i}}" type="text"/>
+    </div>
+    <br/>
+    {% endfor %}
+    <input type="submit" value="SUBMIT"/>
+</form>
+{% endif %}
+<hr />
+<form id="story_randomize_in_progress" method="get">
+    <input type="hidden" name="seed_new" value="True">
+    <input type="hidden" name="id_select" value="{{idx}}">
+    <input type="submit" value="RANDOMIZE"/>
+</form>
+<hr />
+<form id="story_backward" method="get">
+    <input type="submit" value="GO BACK"/>
+</form>
+{% endif %}
+
+
+{% if choices %}
+{% for i in range(0, choices) %}
+<form id="story_choice{{i}}" method="get">
+    <input type="hidden" name="id_select" value="{{i}}">
+    <input id="id_select" value="STORY {{i+1}}" type="submit"/>
+</form>
+<br/>
+{% endfor %}
+<hr />
+<form id="story_randomize" method="get">
+    <input type="hidden" name="seed_new" value="True">
+    <input type="submit" value="RANDOMIZE"/>
+</form>
+{% endif %}
+
+{% endblock %}
