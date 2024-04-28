@@ -4,7 +4,7 @@ from stories import Story
 from generatedstories import GeneratedStories
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "oh-so-secret"
+# app.config['SECRET_KEY'] = "oh-so-secret"
 
 # debug = DebugToolbarExtension(app)
 
