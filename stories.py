@@ -38,7 +38,8 @@ class Story:
         text = self.template
 
         for (key, val) in answers.items():
-            text = text.replace("{" + key + "}", val)
+            if isinstance(key, str) and isinstance(val, str):
+                text = text.replace("{" + key + "}", val)
 
         return text
 
